@@ -3,7 +3,7 @@ const compression = require('compression')
 const { createPageRenderer } = require('vite-plugin-ssr')
 
 const isProduction = process.env.NODE_ENV === 'production'
-const root = `${__dirname}/..`
+const root = `${__dirname}/src`
 
 startServer()
 
