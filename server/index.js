@@ -1,6 +1,14 @@
-const express = require('express')
-const compression = require('compression')
-const { createPageRenderer } = require('vite-plugin-ssr')
+import express from 'express'
+import compression from 'compression'
+import { createPageRenderer } from 'vite-plugin-ssr'
+
+// get __dirname
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+
+const __dirname = path.dirname(__filename);
 
 const isProduction = process.env.NODE_ENV === 'production'
 const root = `${__dirname}/src`
@@ -16,7 +24,7 @@ async function startServer() {
   if (isProduction) {
     app.use(express.static(`${root}/dist/client`))
   } else {
-    const vite = require('vite')
+    const vite = await import('vite')
     viteDevServer = await vite.createServer({
       root,
       server: { middlewareMode: 'ssr' },
